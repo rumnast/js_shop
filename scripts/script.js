@@ -11,7 +11,7 @@ class GoodsList {
         <div>
             <div class="items_card_img">
                 <div class="items_card_buy">
-                    <button class="button_buy">
+                    <button id="${id_product}" class="button_buy">
                         <img src="img/addToCart.png" alt="">
                         Add to Cart
                     </button>
@@ -24,34 +24,27 @@ class GoodsList {
     </div>`;
     };
 
-    __renderCartGoodsItem({ id_product, product_name, price, quantity }) {
-        return ` <div class="items_card">
-        <div>
-            <div class="items_card_img">
-                <div class="items_card_buy">
-                    <button class="button_deleteFromCart">
-                        Delete from Cart
-                    </button>
-                </div>
-                <img src="img/${id_product}.jpg" alt="photo">
-            </div>
-            <div class="items_card_text1">${product_name}</div>
-            <div class="items_card_text2">$${price}</div>
-            <div class="items_card_text1">Количество ${quantity}</div>
-
-        </div>
-    </div>`;
-    };
-
     getGoods(goods) {
         this.goods = goods;
     };
 
     render() {
-        let goodsList = this.goods.map(item => this.__renderGoodsItem(item));
-        document.querySelector('.goods-list').insertAdjacentHTML('afterbegin', goodsList.join(''));
-        console.log(goodsList);
-    };
+        let goodsList = this.goods.map(item => this.__renderGoodsItem(item)).join('');
+        let wrapper = document.querySelector('.goods-list');
+        wrapper.insertAdjacentHTML('afterbegin', goodsList);
+        wrapper.querySelectorAll('[id]').forEach(i => {
+            i.addEventListener('click', () => {
+                //console.log(i);
+                const id = i.getAttribute('id');
+                //console.log(id);
+                //console.log(this.goods);
+                const item = this.goods.find(goodsItem => goodsItem.id_product == id);
+                //console.log(item);
+                list2.addItem(item);
+                //console.log(list2);
+            });
+        });
+    }
 
     SumGoodsList() {
         let sum = 0;
@@ -61,74 +54,65 @@ class GoodsList {
         }
         console.log(`суммарная стоимость всех товаров ${sum}`);
     };
-
-    AddToCart() {
-        let buttons = document.querySelectorAll('.button_buy');
-        console.log(buttons);
-
-        buttons.forEach((button) => {
-            button.addEventListener('click', (event) => {
-                //console.log(event.target)
-                let cartList = new CartList();
-                console.log(cartList);
-                let array = this.goods;
-                console.log(array)
-                function arrayEl(arr) {
-                    if (event) {
-                        console.log(arr)
-                    }
-                }
-                console.log(array.findIndex(arrayEl));
-
-
-
-
-
-                // cartList.product_name = this.goods.product_name;
-                // cartList.price = this.goods.price;
-                // cartList.quantity = 1;
-                // console.log(cartList);
-
-
-
-
-                let goodsList = this.goods.map(item => this.__renderCartGoodsItem(item));
-                document.querySelector('.cart').insertAdjacentHTML('afterbegin', goodsList.join(''));
-
-            });
-        });
-
-
-
-    }
-
 };
 
-list1 = new GoodsList();
-
-fetch('https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json')
-    .then(response => response.json())
-    .then(function (result) {
-        list1.getGoods(result)
-        list1.render()
-        list1.SumGoodsList()
-        //list.AddToCart()
-        list2 = new CartList()
-        console.log(list2);
-
-
-
-    });
-
-
-
 // класс для корзины товаров
-class CartList extends GoodsList {
+class CartList {
+    __items = [];
 
-    constructor(id_product, product_name, price, quantity) {
-        super(id_product, product_name, price);
-        this.quantity = quantity;
+    getItems() {
+        return this.__items;
     }
+
+    addItem = item => {
+        this.__items.push(item);
+        this.render();
+    };
+
+    removeItem(id) {
+        this.__items = this.__items.filter(i => i.id_product != id);
+        console.log(this.__items);
+        this.render();
+    }
+
+    __renderCartGoodsItem({ id_product, product_name, price }) {
+        return ` <div class="items_card">
+        <div>
+            <div class="items_card_img">
+                <div class="items_card_buy">
+                    <button id_cart="${id_product}"class="button_deleteFromCart">
+                        <img src="img/addToCart.png" alt="">
+                        Delete from Cart
+                    </button>
+                </div>
+                <img src="img/${id_product}.jpg" alt="photo">
+            </div>
+            <div class="items_card_text1">${product_name}</div>
+            <div class="items_card_text2">$${price}</div>
+            <div class="items_card_text1">Количество  </div>
+
+        </div>
+    </div>`;
+    };
+
+    render() {
+        //console.log(this.__items);
+        const goodsTemplates = this.__items.map(item => this.__renderCartGoodsItem(item)).join('');
+        const wrapper = document.querySelector('.cart_items');
+        wrapper.innerHTML = goodsTemplates;
+        wrapper.querySelectorAll('[id_cart]').forEach(i => {
+            i.addEventListener('click', () => {
+                const id = i.getAttribute('id_cart');
+                //console.log(id);
+                const item = this.__items.find(goodsItem => goodsItem.id_product == id);
+                //console.log(item);
+                list2.removeItem(id);
+                //console.log(list2)
+            });
+        })
+    }
+
+
 
     SumCart() {
         let sum = 0;
@@ -139,32 +123,18 @@ class CartList extends GoodsList {
         console.log(`суммарная стоимость всех товаров в корзине ${sum}`);
     };
 
-    AddItem() {
-        this.push({ id_product, product_name, price, quantity });
-
-    }
-
-    DeleteItem() {
-        this.items.splice(this.items.indexOf(item));
-
-    }
 
 };
 
-// класс для элемента корзины товаров
-class CartElement extends Cart {
-    constructor(id_product, product_name, price, quantity, size, color) {
-        super(id_product, product_name, price, quantity);
-        this.size = size;
-        this.color = color;
-    }
-    subtotal() {
-        let subtotalCartElement = this.price * this.quantity;
-        console.log(subtotalCartElement);
-        return (`общая стоимость товара ${this.title} равна ${subtotalCartElement}`);
-    }
-};
+
+let list1 = new GoodsList();
+let list2 = new CartList();
 
 
+fetch('https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json')
+    .then(response => response.json())
+    .then(json => list1.getGoods(json))
+    .then(json => list1.render())
+    //.then(json => list1.SumGoodsList())
 
 

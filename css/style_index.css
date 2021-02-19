@@ -298,7 +298,7 @@ body {
           box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.15);
 }
 
-.cart_items {
+.items {
   max-width: 1140px;
   margin: 0 auto;
   display: -webkit-box;
@@ -313,7 +313,7 @@ body {
           align-items: center;
 }
 
-.cart_items .cart {
+.items .cart_items {
   width: inherit;
   margin-top: 60px;
   display: -ms-grid;
@@ -326,24 +326,24 @@ body {
       align-self: stretch;
 }
 
-.cart_items .cart .items_card {
+.items .cart_items .items_card {
   max-width: 261px;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.cart_items .cart .items_card .items_card_img {
+.items .cart_items .items_card .items_card_img {
   position: relative;
   height: 280px;
   background-color: #ffffff;
 }
 
-.cart_items .cart .items_card .items_card_img img {
+.items .cart_items .items_card .items_card_img img {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.cart_items .cart .items_card .items_card_img .items_card_buy {
+.items .cart_items .items_card .items_card_img .items_card_buy {
   height: inherit;
   width: 100%;
   background-color: rgba(58, 56, 56, 0.83);
@@ -351,7 +351,7 @@ body {
   position: absolute;
 }
 
-.cart_items .cart .items_card .items_card_img .items_card_buy .button_buy {
+.items .cart_items .items_card .items_card_img .items_card_buy .button_deleteFromCart {
   width: 140px;
   height: 39px;
   border: 1px solid #ffffff;
@@ -370,7 +370,7 @@ body {
           align-items: center;
 }
 
-.cart_items .cart .items_card .items_card_text1 {
+.items .cart_items .items_card .items_card_text1 {
   margin: 18px;
   font-size: 13px;
   line-height: 1;
@@ -379,7 +379,7 @@ body {
   color: #222222;
 }
 
-.cart_items .cart .items_card .items_card_text2 {
+.items .cart_items .items_card .items_card_text2 {
   margin: 18px;
   margin-bottom: 21px;
   font-size: 16px;
@@ -389,7 +389,7 @@ body {
   color: #f16d7f;
 }
 
-.cart_items .cart .items_card :hover .items_card_buy {
+.items .cart_items .items_card :hover .items_card_buy {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -401,7 +401,7 @@ body {
           align-items: center;
 }
 
-.cart_items .items_card:hover {
+.items .items_card:hover {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.15);
           box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.15);
 }
