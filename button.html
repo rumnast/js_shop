@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="button_buy">Кнопка</button>
+    <button class="button_buy">Кнопка</button>
+    <button class="button_buy">Кнопка</button>
+
+    <script>
+        "use strict";
+
+        let buttons = document.querySelectorAll('.button_buy');
+        console.log(buttons);
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                console.log("forEach worked");
+                console.log(event);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
