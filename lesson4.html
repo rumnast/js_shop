@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        'Lorem 'ipsum dolor sit amet' consectetur <span> aren't I've elefant's</span> adipisicing '' elit. Aliquid quos
+        voluptate,totam sint, labore eum 'voluptatem officiis', quo minima nostrum repudiandae. Eveniet! aliquid
+        numquameius quam magnam.'
+    </div>
+    <button>Замена ' на " </button>
+
+    <script>
+        'use strict';
+        function changeText(event) {
+            let text1 = document.querySelector('div').innerHTML;
+            //console.log(text1);
+            //const regexp = new RegExp('/\w/', 'g');
+            const RegExp = /(\w)"(\w)/g;
+            const regexp2 = /(\')/g;
+            let text2 = text1.replace(regexp2, "\"").replace(RegExp, '$1\'$2');
+            //console.log(text2);
+            let text = document.querySelector('div')
+            text.innerHTML = text2;
+        }
+
+        let button = document.querySelector('button');
+        //console.log(button);
+        button.addEventListener('click', changeText);
+
+    </script>
+
+</body>
+
+</html>
