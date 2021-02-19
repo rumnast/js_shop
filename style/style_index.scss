@@ -213,13 +213,13 @@ body {
 }
 
 
-.cart_items{
+.items{
     max-width: 1140px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .cart{
+    .cart_items{
         width: inherit;
         margin-top: 60px; 
         display: grid;
@@ -243,7 +243,7 @@ body {
                     background-color: rgba(58,56,56,0.83);
                     display: none;
                     position: absolute;
-                    .button_buy{
+                    .button_deleteFromCart{
                         width: 140px;
                         height: 39px;
                         border: 1px solid #ffffff;
