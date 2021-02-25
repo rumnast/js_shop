@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+</head>
+
+<body>
+    <div id="root">
+        <header class="header">
+            <div class="conteiner">
+                <div class="header_logo">
+                    <div class="logo">
+                        BRAN<span>D</span>
+                    </div>
+                    <form class="headerSearch">
+                        <div class="headerSearch_browse">
+                            Browse <i class="fas fa-caret-down"></i>
+                        </div>
+                        <input class="headerSearch_input" placeholder="Search for Item..." type="search"
+                            v-model="searchGoods">
+                        <button @click="filterGoods" class="headerSearch_button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="headerAccount">
+                    <img class="headerCart" src="img/cart.png" alt="cart">
+                    <button @click="toggleCart()" class="headerAccount_button">
+                        {{showCart ? "Close cart" : "Show cart"}}
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <nav class="top_nav">
+            <div class="top_nav_el">
+                <a href="#">LAPTOPS</a>
+            </div>
+            <div class="top_nav_el">
+                <a href="#">PHONES</a>
+            </div>
+            <div class="top_nav_el">
+                <a href="#">PHOTO</a>
+            </div>
+            <div class="top_nav_el">
+                <a href="#">AUDIO</a>
+            </div>
+            <div class="top_nav_el">
+                <a href="#">Accoseries</a>
+            </div>
+        </nav>
+
+
+
+        <div class="items">
+            <div class="goods-list">
+                <div data-id="goods" class="items_card" v-for="item in filteredGoods">
+                    <div class="goods-item">
+                        <div class="items_card_img">
+                            <div class="items_card_buy">
+                                <button @click="addToCart(item)" id="" class="button_buy">
+                                    <img src="img/addToCart.png" alt="">
+                                    Add to Cart
+                                </button>
+                            </div>
+                            <img src="img/123.jpg" alt="photo">
+                        </div>
+                        <div class="items_card_text1">{{item.product_name}}</div>
+                        <div class="items_card_text2">${{item.price}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <hr />
+        <hr />
+
+        <div v-if="showCart" class="items">
+            <div class="cart_items">
+                <div data-id="cart" class="items_card" v-for="item in cartItems">
+                    <div class="goods-item">
+                        <div class="items_card_img">
+                            <div class="items_card_buy">
+                                <button id_cart="" class="button_deleteFromCart">
+                                    <img src="img/addToCart.png" alt="">
+                                    Delete from Cart
+                                </button>
+                            </div>
+                            <img src="img/123.jpg" alt="photo">
+                        </div>
+                        <div class="items_card_text1">{{item.product_name}}</div>
+                        <div class="items_card_text2">${{item.price}}</div>
+                        <div class="items_card_text1">Количество {{item.quantity}}</div>
+                        <div class="items_card_text2">${{item.sum}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <footer class="footer">
+            <div class="conteiner">
+                <div class="logo_footer">
+                    <div class="logo footer_logo">
+                        BRAN<span>D</span>
+                    </div>
+                    <div class="footer_text">
+                        <div>Objectively transition extensive data rather than cross functional solutions.
+                            Monotonectally
+                            syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
+                            expanded
+                            array of processes and cross-unit partnerships.</div>
+                        <div>Efficiently plagiarize 24/365 action items and focused infomediaries.
+                            Distinctively seize superior initiatives for wireless technologies. Dynamically optimize.
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_information">
+                    <div class="footer_inf">
+                        <div class="footer_inf_head">COMPANY</div>
+                        <div class="footer_inf_text">Home</div>
+                        <div class="footer_inf_text">Shop</div>
+                        <div class="footer_inf_text">About</div>
+                        <div class="footer_inf_text">How It Works</div>
+                        <div class="footer_inf_text">Contact</div>
+                    </div>
+                    <div class="footer_inf">
+                        <div class="footer_inf_head">INFORMATION</div>
+                        <div class="footer_inf_text">Tearms & Condition</div>
+                        <div class="footer_inf_text">Privacy Policy</div>
+                        <div class="footer_inf_text">How to Buy</div>
+                        <div class="footer_inf_text">How to Sell</div>
+                        <div class="footer_inf_text">Promotion</div>
+                    </div>
+                    <div class="footer_inf">
+                        <div class="footer_inf_head">SHOP CATEGORY</div>
+                        <div class="footer_inf_text">Laptops</div>
+                        <div class="footer_inf_text">Phones</div>
+                        <div class="footer_inf_text">Photo</div>
+                        <div class="footer_inf_text">Audio</div>
+                        <div class="footer_inf_text">Accoseries</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer_bottom">
+                <div class="conteiner">
+                    <div class="copy">&copy; Brand All Rights Reserved</div>
+                    <div class="cosial">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-linkedin-in"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-google-plus-g"></i>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="scripts/script_lesson5.js"></script>
+
+</body>
+
+</html>
