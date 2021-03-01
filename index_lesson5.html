@@ -71,7 +71,9 @@
                                     Add to Cart
                                 </button>
                             </div>
-                            <img src="img/123.jpg" alt="photo">
+                            <div class="goodsImg">
+                                <img src="#" alt="photo">
+                            </div>
                         </div>
                         <div class="items_card_text1">{{item.product_name}}</div>
                         <div class="items_card_text2">${{item.price}}</div>
@@ -90,12 +92,14 @@
                     <div class="goods-item">
                         <div class="items_card_img">
                             <div class="items_card_buy">
-                                <button id_cart="" class="button_deleteFromCart">
+                                <button @click="removeFromCart(item)" id_cart="" class="button_deleteFromCart">
                                     <img src="img/addToCart.png" alt="">
                                     Delete from Cart
                                 </button>
                             </div>
-                            <img src="img/123.jpg" alt="photo">
+                            <div class="cartImg">
+                                <img :src="item.img">
+                            </div>
                         </div>
                         <div class="items_card_text1">{{item.product_name}}</div>
                         <div class="items_card_text2">${{item.price}}</div>
