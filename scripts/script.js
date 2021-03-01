@@ -135,6 +135,6 @@ fetch('https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/mas
     .then(response => response.json())
     .then(json => list1.getGoods(json))
     .then(json => list1.render())
-    //.then(json => list1.SumGoodsList())
+    .then(json => list1.SumGoodsList())
 
 
